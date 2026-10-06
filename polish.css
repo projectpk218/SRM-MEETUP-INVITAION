@@ -1,0 +1,141 @@
+/* A legible keepsake face for the formal invitation; handwriting stays an accent. */
+:root{--serif:'Fraunces',Georgia,serif;--hand:'Caveat','Segoe Print',cursive;--ink:#183d38;--night:#153935;--paper:#fbf4e6;--copper:#9b5138;--gold:#b68743}
+body{font-size:15px;line-height:1.65}
+h1,h2,h3{font-weight:500}
+.handwritten{font-weight:600;line-height:1.18}
+.arrival-copy h1,.home-hero h1{letter-spacing:-.055em;line-height:1.06}
+.arrival-copy>p:last-child,.hero-note{line-height:1.55}
+.home-hero h1{font-size:clamp(60px,8vw,104px)}
+.memories h2,.come-home h2{letter-spacing:-.04em;line-height:1.14}
+.letter-heading h2{font-size:clamp(57px,8.5vw,101px);letter-spacing:-.055em}
+#reminisce-title:focus{outline:none}
+.memory-words,.reunion-moments>p{line-height:1.6}
+.overline,.institution-name,.faculty-name{letter-spacing:.095em}
+.letter-heading>.handwritten{font-size:clamp(29px,4vw,42px);margin-bottom:32px}
+.reunion-label{line-height:1.3}
+.seal-hint{font-size:20px}
+.warm-regards>.handwritten{font-size:28px}
+.come-home>.handwritten{font-size:27px}
+.memory-note{font-size:20px}
+.person h3{line-height:1.3}
+.person p{line-height:1.7}
+
+/* Keep the envelope tactile while giving the stationery time to emerge. */
+.arrival-screen{transition:opacity 1.15s ease,visibility 1.15s;background:radial-gradient(ellipse at 50% 48%,#42665a 0,#204740 47%,#102d2e 100%)}
+.envelope{perspective:1000px;filter:drop-shadow(0 31px 31px #061e1d8f)}
+.envelope-back{background:linear-gradient(145deg,#e6d9bd,#cabb9a 72%);box-shadow:inset 0 2px 4px #fff8e3b3,inset 0 -4px 13px #87684c33}
+.envelope-front{background:linear-gradient(149deg,transparent 49.7%,#c5ae88 50%,transparent 50.4%) left/51% 100% no-repeat,linear-gradient(211deg,transparent 49.7%,#c5ae88 50%,transparent 50.4%) right/51% 100% no-repeat,linear-gradient(12deg,#e7d7b9,#f5ead1 58%,#e4d3b3);box-shadow:inset 0 0 1px #fff,inset 0 -8px 18px #8c6f4330}
+.envelope-flap{background:linear-gradient(180deg,#f3e7cc 0,#d9c5a2 83%,#bfaa85 100%);transition:transform 1.3s cubic-bezier(.2,.75,.22,1),filter 1.3s;box-shadow:0 2px 5px #866b4933}
+.letter-peek{background:linear-gradient(180deg,#fff9eb,#f7edd9);box-shadow:0 3px 7px #46392a38,0 16px 22px #2a241c35;transform:translateY(0) scale(.97);transform-origin:center bottom;transition:transform 2.35s cubic-bezier(.16,.73,.24,1) 1.05s,box-shadow 2.35s ease 1.05s;padding:29px 16px 38px}
+.letter-peek:before{inset:10px;border:1px solid #bd955978}
+.letter-peek:after{content:'✦';position:absolute;top:16px;left:50%;transform:translateX(-50%);font-size:13px;color:#b68743}
+.letter-peek span{font-size:22px;margin-top:8px;z-index:1}
+.letter-peek strong{font-size:clamp(31px,4.8vw,49px);line-height:1.1;font-weight:500;z-index:1}
+.letter-peek i{font-size:16px;z-index:1}
+.opening .envelope-flap{transform:rotateX(179deg);filter:brightness(.9)}
+.opening .letter-peek{transform:translateY(-76%) scale(1);box-shadow:0 16px 32px #1d211c65,0 3px 8px #46392a38}
+.opening .arrival-copy{opacity:0;transition:opacity .65s ease 1s}
+.opening .seal-hint{opacity:0;transition:opacity .65s ease .7s}
+.opening .wax-seal{transition:transform .5s ease,opacity .5s ease}
+.seal-bloom{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:visible}
+.seal-bloom:before{content:'';position:absolute;left:50%;top:43%;width:22px;height:22px;border-radius:50%;background:#f6da9f;box-shadow:0 0 27px 16px #ffd9938a;opacity:0;transform:translate(-50%,-50%) scale(.2)}
+.opening .seal-bloom:before{animation:seal-glow 1.75s .12s ease-out both}
+.seal-bloom i{position:absolute;left:50%;top:43%;width:9px;height:19px;background:linear-gradient(#fff4ca,#dca96b);border-radius:95% 5% 95% 5%;opacity:0;transform:translate(-50%,-50%) rotate(var(--angle)) translateY(0) scale(.25);box-shadow:0 0 9px #f1d08eaa}
+.seal-bloom i:nth-child(1){--angle:0deg}.seal-bloom i:nth-child(2){--angle:45deg}.seal-bloom i:nth-child(3){--angle:90deg}.seal-bloom i:nth-child(4){--angle:135deg}.seal-bloom i:nth-child(5){--angle:180deg}.seal-bloom i:nth-child(6){--angle:225deg}.seal-bloom i:nth-child(7){--angle:270deg}.seal-bloom i:nth-child(8){--angle:315deg}
+.opening .seal-bloom i{animation:seal-petal 1.3s .25s ease-out both}
+@keyframes seal-glow{22%{opacity:.72;transform:translate(-50%,-50%) scale(2.6)}100%{opacity:0;transform:translate(-50%,-50%) scale(5.2)}}
+@keyframes seal-petal{20%{opacity:.95}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--angle)) translateY(-82px) scale(.15)}}
+
+/* Light, distinct entrances carry the reader through one continuous invitation. */
+.home-hero{background:radial-gradient(ellipse at 55% 48%,#426455 0,#20483f 53%,#102f30 100%)}
+.invitation-awake .hero-logo{animation:hero-arrive 1.1s .1s both}
+.invitation-awake .hello{animation:hero-arrive 1s .3s both}
+.invitation-awake .home-hero h1{animation:hero-arrive 1.3s .42s both}
+.invitation-awake .hero-note{animation:hero-arrive 1.1s .72s both}
+.invitation-awake .scroll-invitation{animation:hero-arrive 1s 1s both}
+@keyframes hero-arrive{from{opacity:0;transform:translateY(23px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+.memories{background-color:#f9f2e3;background-image:radial-gradient(ellipse at 50% 39%,#fdf8ed 0,transparent 62%),url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23755' filter='url(%23n)' opacity='.035' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
+.chapter-entered.memories .memory-landscape svg{animation:memory-appear 1.4s .2s both}
+.chapter-entered.memories .memory-note{animation:memory-note 1s .85s both}
+.chapter-entered.memories .memory-words span{animation:hero-arrive .85s both}
+.chapter-entered.memories .memory-words span:nth-child(1){animation-delay:.45s}.chapter-entered.memories .memory-words span:nth-child(2){animation-delay:.63s}.chapter-entered.memories .memory-words span:nth-child(3){animation-delay:.81s}
+@keyframes memory-appear{from{opacity:.2;transform:translateY(20px) scale(.975)}to{opacity:1;transform:none}}
+@keyframes memory-note{from{opacity:0;filter:blur(3px)}to{opacity:1;filter:none}}
+.quote-section{background:radial-gradient(ellipse at 50% 50%,#b76e4b,#884d3b 76%);box-shadow:inset 0 18px 30px #5d302326,inset 0 -18px 30px #5d302326}
+.chapter-entered.quote-section .quote-spark{animation:quote-star 1.3s .1s both}
+.chapter-entered.quote-section .loop-line path{stroke-dasharray:480;stroke-dashoffset:480;animation:line-draw 1.75s .4s forwards}
+@keyframes quote-star{from{opacity:0;transform:scale(.35) rotate(-40deg)}to{opacity:1;transform:none}}
+@keyframes line-draw{to{stroke-dashoffset:0}}
+.the-letter{background:linear-gradient(180deg,#fff 0 430px,#fffaf1 650px,#fbf4e6 1000px)}
+.ceremonial-reveal{overflow:hidden}
+.invitation-thread{display:none;position:absolute;top:145px;left:4%;right:4%;height:126px;z-index:4;pointer-events:auto;overflow:hidden;filter:drop-shadow(0 3px 3px #795f3e45);background:transparent;color:var(--ink);padding:0;cursor:pointer}
+.ready-to-unfold .invitation-thread{display:block;opacity:1;transition:opacity .4s ease 1.55s}
+.unfolded .invitation-thread{opacity:0;pointer-events:none}
+.thread-end{position:absolute;top:45px;width:calc(50% - 52px);height:2px}
+.thread-end-left{left:0;background:linear-gradient(90deg,#b6874377,#b68743)}
+.thread-end-right{right:0;background:linear-gradient(90deg,#b68743,#b6874377)}
+.thread-bow{position:absolute;left:50%;top:0;width:160px;height:90px;transform:translateX(-50%);overflow:visible}
+.invitation-thread:hover .thread-bow{transform:translateX(-50%) scale(1.05)}
+.thread-prompt{position:absolute;left:50%;top:92px;transform:translateX(-50%);white-space:nowrap;font:600 14px/1.5 var(--sans);letter-spacing:.04em;color:#765b39}
+.thread-bow path{fill:none;stroke:#b68743;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.thread-bow .thread-knot{fill:#c99b56;stroke:#a47735;stroke-width:1.5}
+.thread-loop,.thread-tail{transform-box:fill-box;transform-origin:center}
+.unfolded .thread-end-left{animation:thread-slide-left 1.5s .15s ease-in-out both}
+.unfolded .thread-end-right{animation:thread-slide-right 1.5s .15s ease-in-out both}
+.unfolded .thread-loop-left,.unfolded .thread-tail-left{animation:thread-loosen-left 1.25s ease-in-out both}
+.unfolded .thread-loop-right,.unfolded .thread-tail-right{animation:thread-loosen-right 1.25s ease-in-out both}
+.unfolded .thread-knot{animation:thread-knot-release .9s .15s ease-out both}
+@keyframes thread-slide-left{35%{transform:translateX(-8%) scaleX(1.06)}100%{transform:translateX(-115%) scaleX(.6);opacity:0}}
+@keyframes thread-slide-right{35%{transform:translateX(8%) scaleX(1.06)}100%{transform:translateX(115%) scaleX(.6);opacity:0}}
+@keyframes thread-loosen-left{35%{transform:translate(-8px,-8px) rotate(-14deg)}100%{transform:translate(-42px,-23px) rotate(-40deg) scale(.7);opacity:0}}
+@keyframes thread-loosen-right{35%{transform:translate(8px,-8px) rotate(14deg)}100%{transform:translate(42px,-23px) rotate(40deg) scale(.7);opacity:0}}
+@keyframes thread-knot-release{40%{transform:scale(.8);opacity:1}100%{transform:scale(.2);opacity:0}}
+.ready-to-unfold .ceremony-content{opacity:0;transform:translateY(14px) scale(.985);filter:blur(3px);transition:opacity 1.05s ease .65s,transform 1.15s ease .65s,filter 1.05s ease .65s}
+.unfolded .ceremony-content{opacity:1;transform:none;filter:none}
+.official-marks{position:relative}
+.official-marks img{mix-blend-mode:multiply;background:transparent}
+.unfolded .official-marks img{animation:marks-appear 1.1s .65s both}
+.unfolded .official-marks img:nth-child(1){animation-delay:.6s}.unfolded .official-marks img:nth-child(2){animation-delay:.78s}.unfolded .official-marks img:nth-child(3){animation-delay:.96s}
+@keyframes marks-appear{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.chapter-entered.come-home .gold-thread{animation:thread-grow 1.25s ease-out both}
+.chapter-entered.come-home .keepsake-date i{animation:quote-star 1.2s .4s both}
+@keyframes thread-grow{from{transform:scaleY(0);transform-origin:top}to{transform:scaleY(1);transform-origin:top}}
+.countdown strong{font-variant-numeric:tabular-nums}
+.practical-actions button,.practical-actions a{transition:background .25s,color .25s,transform .25s,box-shadow .25s}
+.practical-actions button:hover,.practical-actions a:hover{transform:translateY(-3px);box-shadow:0 8px 20px #193e3826}
+
+@media(max-width:600px){
+  .invitation-thread{top:132px;left:0;right:0;height:115px}
+  .thread-end{top:38px;width:calc(50% - 43px)}
+  .thread-bow{width:136px;height:76px}
+  .thread-prompt{top:79px;font-size:13px;letter-spacing:.01em}
+  .arrival-copy h1{font-size:clamp(42px,11vw,53px)}
+  .letter-peek{padding:17px 12px 24px}
+  .letter-peek span{font-size:17px}
+  .letter-peek strong{font-size:clamp(29px,8vw,38px)}
+  .letter-peek i{font-size:12px}
+  .seal-hint{font-size:17px}
+  .home-hero h1{font-size:clamp(49px,13.5vw,75px)}
+  .memories h2{font-size:clamp(37px,10.2vw,45px)}
+  .memory-note{font-size:13px}
+  .quote-section p{font-size:clamp(32px,8.5vw,42px)}
+  .letter-heading>.handwritten{font-size:28px}
+  .letter-heading h2{font-size:clamp(51px,13.2vw,74px)}
+  .official-marks{gap:12px}
+  .official-marks img{width:37px}
+  .official-marks .main-mark{width:min(43vw,174px)}
+  .warm-regards>.handwritten{font-size:23px}
+  .come-home>.handwritten{font-size:22px}
+  .come-home h2{font-size:clamp(48px,12.5vw,65px)}
+}
+@media(max-height:680px){.letter-peek{padding-top:15px}.letter-peek:after{top:9px}.opening .letter-peek{transform:translateY(-66%) scale(1)}}
+@media(prefers-reduced-motion:reduce){
+  .ready-to-unfold .invitation-thread{display:block}
+  .ready-to-unfold.unfolded .invitation-thread{display:none}
+  .ready-to-unfold .ceremony-content{opacity:0;transform:none;filter:none}
+  .ready-to-unfold.unfolded .ceremony-content{opacity:1}
+  .seal-bloom{display:none}
+  .arrival-screen,.envelope-flap,.letter-peek,.practical-actions button,.practical-actions a{animation:none!important;transition:none!important}
+  .invitation-awake .home-hero *, .chapter-entered.memories .memory-landscape svg,.chapter-entered.memories .memory-note,.chapter-entered.memories .memory-words span,.chapter-entered.quote-section .quote-spark,.chapter-entered.quote-section .loop-line path,.unfolded .official-marks img,.chapter-entered.come-home .gold-thread,.chapter-entered.come-home .keepsake-date i{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;stroke-dashoffset:0!important}
+}
+@media print{.invitation-thread{display:none!important}.official-marks img{mix-blend-mode:normal}}

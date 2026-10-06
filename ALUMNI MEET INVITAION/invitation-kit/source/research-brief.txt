@@ -1,0 +1,925 @@
+Research-Backed Prompt Specification for a Senior Alumni-Meet Digital Invitation
+Executive Summary
+The strongest alumni invitation should not look like a generic college fest poster. For senior alumni, the invitation has to communicate three things almost instantly: institutional credibility, emotional reconnection, and the practical reason to attend. Current reunion programs from INSEAD, MIT Sloan, and the University at Buffalo consistently frame alumni gatherings around reconnecting with classmates, returning to the institution, learning from faculty or leaders, networking, and celebrating shared history; senior-alumni programs also explicitly surface practical details such as dress code, registration, agenda, and contacts. 
+
+The recommended system therefore treats the coined event name as the emotional brand, while the institution, date, venue, and RSVP provide immediate trust and usability. The invitation should be available in three selectable voices: Premium/Formal, Warm-Casual, and Modern-MBA. These are not three completely different brands; they are three expressions of one alumni identity.
+
+Accessibility matters particularly for a senior audience. WCAG 2.2 calls for at least 4.5:1 contrast for normal text and 3:1 for large text, while W3C's work on older users specifically highlights reduced contrast sensitivity and the value of readable text and sufficiently large controls. 
+ HTML email should preserve important information as real text rather than embedding everything in a poster image, and a practical CTA target of about 44×44 pixels or larger is appropriate for touch use; Mailchimp explicitly recommends that size for email CTAs. 
+
+The recommended production approach is one responsive master design system adapted to channel-specific formats: approximately 660 px content width for email, 1080×1350 for portrait social/direct messaging, 1080×1920 for Stories/vertical status, and an A5 portrait invitation PDF with an optional A4 version. Mailchimp's current builder uses a 660 px email width and recommends 660–1320 px images, while Canva's current size guide lists 1080×1350 for portrait Instagram images and 1080×1920 for Stories. 
+
+What remains unspecified
+No final coined event brand has been selected in the conversation, so the prompt uses [EVENT_BRAND] rather than inventing another name. The institution, date, time, venue, virtual link, RSVP details, dress code, speakers, hosts, agenda, contacts, social handles, hashtag, logo, and imagery are also unspecified and remain explicit placeholders.
+
+The final prompt at the end of this report is designed so those fields can be supplied later without rewriting the creative brief.
+
+Research Basis and Event Strategy
+What premium alumni programs signal
+A useful benchmark is not a commercial party invitation but official university reunion communication. INSEAD's October 2026 MBA reunion for alumni 35–50 years after graduation combines emotional language about returning, rekindling friendships, and reconnecting with the school with a substantive program of dean/faculty sessions, class meetings, networking, and meals. It also clearly states practical information such as business-casual campus attire, formal-dinner attire, registration information, and contacts. 
+
+MIT Sloan's 2026 reunion similarly emphasizes three dimensions: reconnecting with classmates, learning from faculty, and developing new friendships and professional relationships. 
+ University at Buffalo's global reunion illustrates the more ceremonial end of the spectrum, combining alumni connection with a keynote, institutional legacy, dinner, and formal dress. 
+
+That leads to a useful strategic formula for this invitation:
+
+Shared origin + present achievement + renewed connection + future relevance
+
+For senior alumni, nostalgia should therefore be present but not dominate. The design should say, in effect: we remember where we began, we respect what everyone has become, and there is value in gathering again.
+
+Required information architecture
+The invitation should establish a strict hierarchy rather than presenting every fact with equal visual weight.
+
+Visual priority	Content	Treatment
+Primary	[EVENT_BRAND]	Largest event identity
+Primary	[EVENT_DATE] · [EVENT_TIME] · [TIME_ZONE]	Immediately scannable
+Primary	[VENUE_NAME] / [VIRTUAL_EVENT_LABEL]	Prominent fact line
+Primary	RSVP + [RSVP_DEADLINE]	High-contrast CTA
+Secondary	One-line hook	Emotional/value proposition
+Secondary	Two-line description	Why senior alumni should attend
+Secondary	[KEYNOTE_NAME] / [HOSTS]	Credibility and relevance
+Secondary	[AGENDA_HIGHLIGHT_1–3]	Maximum three highlights on compact formats
+Secondary	[DRESS_CODE]	Concise practical information
+Footer	[CONTACT], [SOCIAL_HANDLES], [EVENT_HASHTAG]	Supporting information
+Conditional	[VIRTUAL_LINK]	Display only when virtual/hybrid; never expose a sensitive meeting credential publicly
+
+This reflects the way official alumni pages combine an emotional reunion proposition with program, registration, dress, and contact information rather than relying on nostalgia alone. 
+
+Complete variable set
+The connector prompt should accept:
+
+[INSTITUTION]
+[INSTITUTION_SHORT_NAME]
+[EVENT_BRAND]
+[EVENT_BRAND_MEANING]
+[EVENT_YEAR]
+[CLASS_YEARS_OR_COHORT]
+[EVENT_DATE]
+[EVENT_TIME]
+[TIME_ZONE]
+[VENUE_NAME]
+[VENUE_ADDRESS]
+[MAP_LINK]
+[EVENT_MODE: IN_PERSON | VIRTUAL | HYBRID]
+[VIRTUAL_LINK]
+[RSVP_URL]
+[RSVP_DEADLINE]
+[DRESS_CODE]
+[KEYNOTE_NAME]
+[KEYNOTE_TITLE]
+[HOSTS]
+[AGENDA_HIGHLIGHT_1]
+[AGENDA_HIGHLIGHT_2]
+[AGENDA_HIGHLIGHT_3]
+[CONTACT_NAME]
+[CONTACT_EMAIL]
+[CONTACT_PHONE]
+[SOCIAL_HANDLES]
+[EVENT_HASHTAG]
+[INSTITUTION_LOGO_ASSET]
+[EVENT_MARK_ASSET]
+[HERO_IMAGE_ASSET]
+[APPROVED_BRAND_COLORS]
+[APPROVED_FONTS]
+
+The key rule is never fabricate missing event facts. An unresolved value should remain a clearly marked placeholder such as [EVENT_DATE], not be filled with plausible-looking fictional information.
+
+Tone, Copy, and Brand Language
+The following editorial limits are design recommendations derived from the need to keep social/mobile invitations scannable; they are not external standards.
+
+Tone	Voice	Recommended copy limits	Sample headline
+Premium / Formal	Distinguished, restrained, gracious, ceremonial; emphasizes legacy and stature	Headline 3–7 words; hook 8–16; description 25–45; CTA 2–5; reminder 15–30	A Distinguished Evening of Return
+Warm-Casual	Personal, nostalgic, welcoming, conversational without becoming youthful or slang-heavy	Headline 3–6 words; hook 8–18; description 25–50; CTA 2–5; reminder 15–35	Back Where It Began
+Modern-MBA	Crisp, intelligent, confident, network-oriented and future-facing	Headline 2–5 words; hook 7–14; description 20–40; CTA 2–4; reminder 12–28	Reconnect. Reflect. Reimagine.
+
+The Modern-MBA direction is particularly well aligned with business-school reunion programming because schools such as MIT Sloan and INSEAD combine reunion with faculty learning, leadership discussion, and networking rather than treating the occasion as purely social. 
+
+Premium and formal copy
+Headline
+
+A Distinguished Evening of Return
+
+One-line hook
+
+Reconnect with the people, ideas, and institution that shaped your journey.
+
+Two-line description
+
+Join fellow alumni for [EVENT_BRAND], an evening of reflection, meaningful conversation, and renewed connection at [INSTITUTION].
+Celebrate the journey so far while looking ahead to the chapters still to be written.
+
+RSVP CTA
+
+Reserve Your Place
+
+Reminder
+
+A gracious reminder: [EVENT_BRAND] takes place on [EVENT_DATE]. Kindly confirm your attendance by [RSVP_DEADLINE].
+
+Warm-casual copy
+Headline
+
+Back Where It Began
+
+One-line hook
+
+Old stories, familiar faces, one more evening together.
+
+Two-line description
+
+Come back to [INSTITUTION] for [EVENT_BRAND]—a gathering to reconnect, revisit the memories, and celebrate where life has taken everyone since.
+We would love to welcome you back.
+
+RSVP CTA
+
+I’ll Be There
+
+Reminder
+
+Just a quick reminder—[EVENT_BRAND] is almost here. RSVP by [RSVP_DEADLINE], and we’ll see you on [EVENT_DATE].
+
+Modern-MBA copy
+Headline
+
+Reconnect. Reflect. Reimagine.
+
+One-line hook
+
+Where shared roots meet new ideas, networks, and possibilities.
+
+Two-line description
+
+[EVENT_BRAND] brings the [INSTITUTION] alumni network together for meaningful reconnections, sharp conversations, and a look at what comes next.
+Join peers, leaders, and faculty for an evening built around connection and momentum.
+
+RSVP CTA
+
+Confirm Attendance
+
+Reminder
+
+[EVENT_BRAND] is approaching. Confirm by [RSVP_DEADLINE] to reconnect with the alumni network on [EVENT_DATE].
+
+Short taglines and hashtags
+Strong tagline candidates are:
+
+Where journeys reconnect. · Shared roots. New horizons. · Built together. Back together. · Where legacy meets what’s next. · From memories to momentum. · One beginning. Many journeys. · Return to the roots. Reconnect to the future.
+
+For the coined brand, the most ownable hashtag should normally be the brand itself: #[EVENTBRAND] or #[EVENTBRAND][EVENTYEAR]. Supporting options are #[INSTITUTION]Alumni, #AlumniReconnect, #BackTo[INSTITUTION], and #SharedRootsNewHorizons. Because the actual coined event name remains unspecified, availability and ambiguity should be checked before public use rather than hard-coding any of these as the official campaign tag.
+
+Visual System, Formats, and Accessibility
+Visual directions
+The institution's own brand system should override every generic palette or type recommendation below. Major university identity systems such as MIT's and Stanford's explicitly specify logo clear space, approved use, and placement constraints; that is evidence for following the actual institution's identity rules rather than improvising around the university mark. 
+
+Tone	Suggested palette	Typography direction	Imagery
+Premium / Formal	Midnight #0B1F33, ivory #F7F2E8, charcoal #1F2933, muted gold #B08D57 as accent only	Refined serif display + highly legible sans-serif body	Architectural campus details, archival/current campus pairing, elegant alumni portraits, restrained linework
+Warm-Casual	Forest #173A2B, cream #FFF8EB, terracotta #A64B2A, cocoa #5B4636	Warm serif or humanist sans with friendly spacing	Authentic alumni moments, campus landmarks, subtle archival photographs, memory-card treatment
+Modern-MBA	Deep cobalt #193B7A, off-white #F8FAFC, teal #0F766E, graphite #334155	Clean geometric/humanist sans; optional restrained serif accent	Executive/network imagery, architectural grids, abstract connection lines, faculty/alumni speaker imagery
+
+The muted gold in the formal palette should be treated as an accent rather than small body text. Every final foreground/background pair must be tested, because WCAG AA requires at least 4.5:1 for normal text and 3:1 for qualifying large text. 
+
+For senior alumni, favor readable mixed-case typography, generous spacing, restrained line lengths, and clear controls. W3C notes that aging can involve reduced contrast sensitivity and changes in visual perception, and its older-user guidance emphasizes readable text, contrast, understandable presentation, and large links/buttons. 
+
+Logo and event-brand placement
+Use the official uploaded institution logo, never a generated approximation. Do not distort, redraw, crowd, or invent a new university lock-up. Preserve whatever clear space and minimum size the institution's own identity guide specifies. MIT, for example, explicitly places its logo in digital newsletter headers, while Stanford specifies clear space around its marks; those are examples of the broader principle, not rules to copy numerically for another institution. 
+
+Recommended hierarchy:
+
+Institution logo → “presents” or alumni-office descriptor → coined [EVENT_BRAND] → tagline
+
+The coined event mark can be more expressive than the institution logo, but it should remain visually subordinate enough that recipients immediately understand the invitation is authentic.
+
+Channel size system
+Deliverable	Recommended master	Design instruction
+HTML email	660 px max content width	Responsive, predominantly one column; live HTML text
+Email hero asset	1320 px source width	Render around 660 px for high-density displays; optimize file size
+WhatsApp direct-share invite	1080×1350 px	Recommended portrait convenience preset, not presented as an official WhatsApp requirement
+WhatsApp Status	1080×1920 px	Vertical 9:16 campaign adaptation
+Instagram portrait post	1080×1350 px	Primary feed format
+Instagram square fallback	1080×1080 px	Only when square distribution is required
+Instagram Story	1080×1920 px	9:16; keep essential text away from extreme top/bottom UI zones
+Digital PDF	A5 portrait, 148×210 mm	Clickable RSVP/contact; accessible reading order
+Print-friendly PDF	A5 or A4	Print profile and bleed according to printer specification
+
+The 660 px email recommendation follows Mailchimp's current new-builder width; Mailchimp recommends 660–1320 px image widths there and a maximum 1 MB image file size. 
+ Canva's current design-size guide lists 1080×1350 for portrait Instagram images, 1080×1080 for square images, and 1080×1920 for Stories. 
+
+Accessibility requirements
+The template should enforce these as acceptance criteria, not optional polish:
+
+All ordinary text/background combinations meet WCAG 2.2 AA 4.5:1; large text meets at least 3:1. Do not rely on color alone to communicate meaning. 
+HTML email keeps the event name, date, location, RSVP information, and essential message as real HTML text, not only inside a raster graphic. Mailchimp specifically recommends keeping important messages in HTML and using semantic headings for accessible email. 
+Use a comfortably large RSVP button; 44×44 px or larger is a practical email target recommendation. WCAG 2.2 itself establishes a 24×24 CSS-pixel minimum target subject to defined exceptions, while its enhanced guidance encourages larger targets. 
+Informative images receive concise, meaningful alt text. Decorative graphics receive empty/null alt treatment where supported. Mailchimp recommends short descriptive alt text, while W3C accessibility guidance distinguishes meaningful from decorative imagery. 
+Do not put crucial information exclusively in low-contrast gold, thin type, italics, decorative scripts, or an image overlay.
+Digital PDF output should preserve selectable text, clickable URLs, meaningful reading order, and image descriptions when the connector/export pipeline supports tagged PDFs.
+Template Variations and Layout Wireframes
+The three concepts below deliberately share the same content architecture. What changes is the emotional entry point and visual rhythm, so the final coined brand can move between formal, approachable, and MBA-oriented positioning without rebuilding the communication system.
+
+Legacy Editorial
+Best fit: Premium/Formal
+Idea: The alumni meet feels like a distinguished institutional occasion rather than an entertainment poster.
+
+Institution Logo / Alumni Office
+
+[EVENT_BRAND] Hero
+
+Short Legacy-Focused Tagline
+
+Date • Time • Venue
+
+Keynote / Hosts
+
+3 Agenda Highlights
+
+Dress Code
+
+Primary RSVP CTA + Deadline
+
+Contact • Social • Hashtag
+
+
+
+Show code
+Visual behavior: generous ivory negative space; midnight typography; thin rules; restrained metallic/gold accent; one high-quality campus or alumni image rather than a collage.
+
+Sample microcopy
+
+[INSTITUTION] presents
+[EVENT_BRAND]
+Where legacy meets what’s next.
+
+[EVENT_DATE] · [EVENT_TIME]
+[VENUE_NAME]
+
+An evening of meaningful reconnection, shared milestones, and renewed possibilities.
+
+Reserve Your Place
+
+This structure draws particularly well from senior-reunion programs such as INSEAD's, where reunion is framed through institutional belonging, class connections, faculty engagement, and a more formal social occasion. 
+
+Memory-to-Momentum
+Best fit: Warm-Casual
+Idea: Begin with familiarity and memory, then shift deliberately toward who alumni have become.
+
+Institution Logo
+
+Campus / Memory Image
+
+Warm Headline
+
+[EVENT_BRAND]
+
+Date • Time • Venue
+
+2-Line Welcome
+
+Reconnect • Remember • Celebrate
+
+RSVP CTA
+
+Hashtag • Contact • Social
+
+
+
+Show code
+Visual behavior: warm photography, cream background, one archival/current pairing or small memory strip, softer typography, minimal iconography.
+
+Sample microcopy
+
+Back where it began.
+[EVENT_BRAND]
+
+Old stories. Familiar faces. New chapters to share.
+
+[EVENT_DATE] · [VENUE_NAME]
+
+Come back for an evening to reconnect, reminisce, and celebrate the journeys that began here.
+
+I’ll Be There
+
+The concept is consistent with the emotional language used in official reunion communications, where returning to campus, rekindling friendships, and renewing institutional connection are central themes. 
+
+Executive Network
+Best fit: Modern-MBA
+Idea: Treat the alumni meeting as the intersection of relationship, leadership, ideas, and professional momentum.
+
+Institution Logo + Event Mark
+
+Bold [EVENT_BRAND]
+
+Reconnect • Reflect • Reimagine
+
+Date | Venue | Dress Code
+
+1-Line Value Proposition
+
+Keynote / Featured Leader
+
+Network | Insights | Celebration
+
+Confirm Attendance CTA
+
+RSVP Deadline • Contact • Hashtag
+
+
+
+Show code
+Visual behavior: disciplined grid; cobalt/graphite base; teal accent; clean data-like fact blocks; professional speaker treatment; abstract connection/network pattern used lightly.
+
+Sample microcopy
+
+[EVENT_BRAND]
+Reconnect. Reflect. Reimagine.
+
+[EVENT_DATE] | [VENUE_NAME] | [DRESS_CODE]
+
+Where shared roots meet new ideas, networks, and possibilities.
+
+Featuring [KEYNOTE_NAME]
+[KEYNOTE_TITLE]
+
+NETWORK · INSIGHTS · CELEBRATION
+
+Confirm Attendance
+
+MIT Sloan's and INSEAD's reunion programs support this more intellectually active framing: reunion programming combines peer reconnection with faculty learning, class sessions, networking, and leadership or institutional updates. 
+
+Production, Export, and File Conventions
+Recommended export behavior
+Output	Export specification
+PNG social / WhatsApp	Exact target pixel dimensions; RGB/sRGB; optimized without visibly degrading type or logos
+HTML email	Responsive 660 px max-width master; live text; semantic headings; alt attributes; CTA button; mobile stacking; links for RSVP/map/contact/social
+Email images	RGB; aim for ≤1 MB each where practical; render high-density source images down responsively
+Digital PDF	A5 portrait; RGB/sRGB; selectable text; clickable RSVP/contact/map links; accessible reading order
+Print PDF	High-resolution assets; printer-requested CMYK profile; fonts embedded; bleed/crop settings supplied by printer; preflight before release
+Archive/editable	Retain editable source with separate text, logo, image, background, and CTA layers
+
+Mailchimp explicitly recommends RGB for email imagery, supports PNG/JPG/GIF, recommends images no larger than 1 MB, and uses a 660 px width in its current builder. 
+ For professional printing, Adobe emphasizes correct resolution, color handling, embedded fonts, and print-ready PDF workflows, and currently recommends PDF/X-4 as a conversion option for professional output. 
+
+For HTML email, assume clients will behave differently and keep the structure conservative: single-column-first, mobile responsive, live copy, and a real HTML CTA are safer than reproducing the social poster as one giant image. Mailchimp's current responsive-email guidance specifically warns against hiding important messages in images and recommends mobile-friendly CTAs. 
+
+File naming
+Use a consistent machine-sortable convention:
+
+[institution]_[event-brand]_[YYYY-MM-DD]_[channel]_[tone]_v01.[ext]
+
+Examples:
+
+text
+Copy
+[institution]_[event-brand]_[YYYY-MM-DD]_instagram-post_modern-mba_v01.png
+[institution]_[event-brand]_[YYYY-MM-DD]_instagram-story_modern-mba_v01.png
+[institution]_[event-brand]_[YYYY-MM-DD]_whatsapp-share_modern-mba_v01.png
+[institution]_[event-brand]_[YYYY-MM-DD]_whatsapp-status_modern-mba_v01.png
+[institution]_[event-brand]_[YYYY-MM-DD]_email_modern-mba_v01.html
+[institution]_[event-brand]_[YYYY-MM-DD]_invite-digital_modern-mba_v01.pdf
+[institution]_[event-brand]_[YYYY-MM-DD]_invite-print_modern-mba_v01.pdf
+Keep filenames lowercase, replace spaces with hyphens, use the same event-brand slug across channels, and increment versions (v01, v02, v03) rather than adding ambiguous suffixes such as final-final-new.
+
+Final Ready-to-Use Connector Prompt
+The following is deliberately a single self-contained prompt. It can be pasted into a capable template-creator connector after replacing whatever variables are known. Unspecified values may remain as placeholders.
+
+text
+Copy
+Create a premium, editable, multi-format DIGITAL ALUMNI-MEET INVITATION TEMPLATE for senior alumni.
+
+IMPORTANT:
+This is an invitation system for experienced/senior alumni, not a student fest, nightclub event, generic corporate conference, or youth-oriented party poster. The result should communicate institutional credibility, shared history, meaningful reconnection, and contemporary relevance.
+
+Do NOT invent missing event information.
+Do NOT invent or rename the coined event brand.
+Use [EVENT_BRAND] exactly as supplied.
+When a variable is unspecified, keep its placeholder visibly editable rather than fabricating a value.
+
+==================================================
+INPUT VARIABLES
+==================================================
+
+Institution:
+[INSTITUTION]
+
+Institution short name:
+[INSTITUTION_SHORT_NAME]
+
+Official institution logo asset:
+[INSTITUTION_LOGO_ASSET]
+
+Coined event brand:
+[EVENT_BRAND]
+
+Meaning/story behind coined brand:
+[EVENT_BRAND_MEANING]
+
+Optional event-mark/logo asset:
+[EVENT_MARK_ASSET]
+
+Event year:
+[EVENT_YEAR]
+
+Class years/cohort:
+[CLASS_YEARS_OR_COHORT]
+
+Date:
+[EVENT_DATE]
+
+Time:
+[EVENT_TIME]
+
+Time zone:
+[TIME_ZONE]
+
+Event mode:
+[EVENT_MODE: IN_PERSON | VIRTUAL | HYBRID]
+
+Venue:
+[VENUE_NAME]
+
+Venue address:
+[VENUE_ADDRESS]
+
+Map link:
+[MAP_LINK]
+
+Virtual link:
+[VIRTUAL_LINK]
+
+RSVP link:
+[RSVP_URL]
+
+RSVP deadline:
+[RSVP_DEADLINE]
+
+Dress code:
+[DRESS_CODE]
+
+Keynote / featured speaker:
+[KEYNOTE_NAME]
+
+Speaker title:
+[KEYNOTE_TITLE]
+
+Hosts:
+[HOSTS]
+
+Agenda highlight:
+[AGENDA_HIGHLIGHT_1]
+
+Agenda highlight:
+[AGENDA_HIGHLIGHT_2]
+
+Agenda highlight:
+[AGENDA_HIGHLIGHT_3]
+
+Contact:
+[CONTACT_NAME]
+[CONTACT_EMAIL]
+[CONTACT_PHONE]
+
+Social handles:
+[SOCIAL_HANDLES]
+
+Official hashtag:
+[EVENT_HASHTAG]
+
+Hero/photo asset:
+[HERO_IMAGE_ASSET]
+
+Approved institution colors:
+[APPROVED_BRAND_COLORS]
+
+Approved institution fonts:
+[APPROVED_FONTS]
+
+Selected tone:
+[TONE = PREMIUM_FORMAL | WARM_CASUAL | MODERN_MBA]
+
+Selected layout:
+[LAYOUT = LEGACY_EDITORIAL | MEMORY_TO_MOMENTUM | EXECUTIVE_NETWORK | AUTO]
+
+==================================================
+AUDIENCE AND COMMUNICATION GOAL
+==================================================
+
+Primary audience: senior/experienced alumni of [INSTITUTION].
+
+Design for an audience that values:
+- credibility and institutional pride
+- long-standing relationships and shared memories
+- professional achievement
+- thoughtful networking
+- reconnecting with classmates, faculty, and the institution
+- clear logistical information
+
+The invitation should feel respectful of the audience's stature while remaining emotionally inviting.
+
+Core narrative:
+SHARED ORIGIN → INDIVIDUAL JOURNEYS → RECONNECTION → WHAT COMES NEXT.
+
+Avoid:
+- student-fest aesthetics
+- neon nightclub treatments
+- cartoonish nostalgia
+- excessive confetti
+- childish iconography
+- overdecorated luxury motifs
+- generic AI “business people shaking hands”
+- excessive gradients or glassmorphism
+- cliché graduation caps unless specifically requested
+- overcrowded text
+- tiny logistical details
+- long blocks of centered body copy
+- fake logos, fake speakers, fake dates, fake venues, or invented event facts
+
+==================================================
+TONE LOGIC
+==================================================
+
+When TONE = PREMIUM_FORMAL:
+Voice = dignified, refined, gracious, restrained, ceremonial, legacy-focused.
+Headline length = approximately 3–7 words.
+Hook = approximately 8–16 words.
+Description = approximately 25–45 words.
+CTA = approximately 2–5 words.
+Preferred visual mood = editorial, understated, institutional, elegant.
+
+Suggested copy direction:
+Headline: “A Distinguished Evening of Return”
+Hook: “Reconnect with the people, ideas, and institution that shaped your journey.”
+CTA: “Reserve Your Place”
+
+Suggested palette if no official palette is supplied:
+Midnight #0B1F33
+Ivory #F7F2E8
+Charcoal #1F2933
+Muted Gold #B08D57 — accent/decorative use only, not low-contrast small text.
+
+Typography:
+Refined editorial serif for display + highly readable neutral sans-serif for body.
+Use institution-approved fonts whenever supplied.
+
+When TONE = WARM_CASUAL:
+Voice = personal, genuine, nostalgic, welcoming, mature, conversational.
+Do not become slang-heavy or overly youthful.
+Headline length = approximately 3–6 words.
+Hook = approximately 8–18 words.
+Description = approximately 25–50 words.
+CTA = approximately 2–5 words.
+
+Suggested copy direction:
+Headline: “Back Where It Began”
+Hook: “Old stories, familiar faces, one more evening together.”
+CTA: “I’ll Be There”
+
+Suggested palette if no official palette is supplied:
+Forest #173A2B
+Cream #FFF8EB
+Terracotta #A64B2A
+Cocoa #5B4636
+
+Typography:
+Warm serif or humanist sans-serif with generous spacing.
+
+When TONE = MODERN_MBA:
+Voice = intelligent, concise, confident, contemporary, network-oriented, forward-looking.
+Headline length = approximately 2–5 words.
+Hook = approximately 7–14 words.
+Description = approximately 20–40 words.
+CTA = approximately 2–4 words.
+
+Suggested copy direction:
+Headline: “Reconnect. Reflect. Reimagine.”
+Hook: “Where shared roots meet new ideas, networks, and possibilities.”
+CTA: “Confirm Attendance”
+
+Suggested palette if no official palette is supplied:
+Deep Cobalt #193B7A
+Off White #F8FAFC
+Teal #0F766E
+Graphite #334155
+
+Typography:
+Clean geometric/humanist sans-serif, optionally paired with one restrained editorial serif accent.
+
+==================================================
+CONTENT HIERARCHY
+==================================================
+
+The viewer must understand the following within the first visual scan:
+
+1. This is an official [INSTITUTION] alumni event.
+2. The event is called [EVENT_BRAND].
+3. The date/time is [EVENT_DATE] / [EVENT_TIME] / [TIME_ZONE].
+4. The location or event mode is [VENUE_NAME] / [EVENT_MODE].
+5. There is a clear action to RSVP.
+
+Use this hierarchy:
+
+TOP:
+Official [INSTITUTION_LOGO_ASSET]
+Optional small descriptor such as “Alumni Office presents” only when appropriate.
+
+HERO:
+[EVENT_BRAND]
+Short tagline or hook.
+
+CORE FACT BLOCK:
+[EVENT_DATE]
+[EVENT_TIME]
+[TIME_ZONE]
+[VENUE_NAME]
+[EVENT_MODE]
+
+VALUE SECTION:
+One short two-line invitation description.
+
+PROGRAM SECTION:
+[KEYNOTE_NAME] — [KEYNOTE_TITLE]
+Hosted by [HOSTS], when supplied.
+
+Show no more than three compact agenda highlights:
+[AGENDA_HIGHLIGHT_1]
+[AGENDA_HIGHLIGHT_2]
+[AGENDA_HIGHLIGHT_3]
+
+PRACTICAL:
+Dress: [DRESS_CODE]
+
+CTA:
+Primary action = RSVP.
+CTA links to [RSVP_URL].
+Show “RSVP by [RSVP_DEADLINE]” directly beside/below it.
+
+FOOTER:
+[CONTACT_NAME]
+[CONTACT_EMAIL]
+[CONTACT_PHONE]
+[SOCIAL_HANDLES]
+[EVENT_HASHTAG]
+
+For virtual/hybrid events:
+Include [VIRTUAL_LINK] only in versions intended for confirmed/appropriate recipients if the URL is private.
+For public promotional versions, use an RSVP or event-info CTA instead of publishing sensitive meeting credentials.
+
+==================================================
+LAYOUT SYSTEM
+==================================================
+
+If LAYOUT = LEGACY_EDITORIAL:
+Use:
+Institution logo
+→ [EVENT_BRAND]
+→ elegant hook
+→ date/time/venue
+→ keynote/hosts
+→ 3 agenda highlights
+→ dress code
+→ RSVP
+→ contact/social footer.
+
+Visual character:
+generous negative space, strong typographic hierarchy, one sophisticated image maximum, thin rules, restrained accent color.
+
+If LAYOUT = MEMORY_TO_MOMENTUM:
+Use:
+Institution logo
+→ archival/campus/alumni image
+→ warm headline
+→ [EVENT_BRAND]
+→ date/time/venue
+→ short personal welcome
+→ three themes such as Reconnect / Remember / Celebrate
+→ RSVP
+→ hashtag/contact.
+
+Visual character:
+warm photography, subtle archival/current image pairing, mature nostalgia, soft but uncluttered layout.
+
+If LAYOUT = EXECUTIVE_NETWORK:
+Use:
+Institution logo + optional event mark
+→ bold [EVENT_BRAND]
+→ concise headline
+→ horizontal/stacked date + venue + dress-code facts
+→ one-line value proposition
+→ keynote
+→ three modules: Network / Insights / Celebration
+→ RSVP
+→ social/contact.
+
+Visual character:
+disciplined editorial grid, clean information modules, modern MBA/executive character, subtle network or connection motif.
+
+If LAYOUT = AUTO:
+Choose the layout that best supports the selected TONE and available content, but maintain one coherent visual system.
+
+==================================================
+IMAGERY AND ICONS
+==================================================
+
+Prioritize, in order:
+
+1. approved authentic institution/campus photography
+2. approved alumni photography
+3. tasteful architectural detail
+4. subtle archival/current photo pairing
+5. abstract connection/network graphic if no approved photography exists
+
+Do not generate fake documentary-looking alumni photographs that imply fictional people actually attended this institution.
+
+If [HERO_IMAGE_ASSET] exists, use it.
+If no hero asset exists, create an image PLACEHOLDER or a subtle abstract/campus-inspired visual treatment rather than inventing identifiable alumni.
+
+Use icons sparingly:
+calendar = date
+clock = time
+location pin = venue
+video/screen = virtual
+dress/formal icon only if elegant and necessary
+
+Do not use icons instead of written labels when the meaning could become ambiguous.
+
+==================================================
+LOGO AND BRAND RULES
+==================================================
+
+Use [INSTITUTION_LOGO_ASSET] exactly as provided.
+
+Do not:
+- redraw it
+- stretch it
+- rotate it
+- add effects
+- recolor it unless approved variants are supplied
+- crowd it against text
+- merge [EVENT_BRAND] into the institution mark
+- invent an institutional lock-up
+
+Preserve the clear-space and minimum-size rules supplied by [INSTITUTION].
+If those rules are not provided, use conservative clear space and flag “VERIFY INSTITUTION BRAND GUIDELINES” in the editable design notes.
+
+The coined [EVENT_BRAND] may have a distinctive typographic treatment, but the invitation must still immediately read as an official institutional alumni communication.
+
+==================================================
+ACCESSIBILITY — REQUIRED
+==================================================
+
+Meet WCAG 2.2 AA contrast targets:
+- normal text: at least 4.5:1
+- qualifying large text: at least 3:1
+
+Do not rely on color alone to communicate information.
+
+For senior readability:
+- favor clear mixed-case typography
+- avoid long all-capital passages
+- avoid thin low-contrast text
+- avoid long italic passages
+- use generous spacing
+- keep essential details visually large and obvious
+- avoid long centered body paragraphs
+
+For HTML:
+- keep event name, date, venue, description, dress code, agenda, contact, and RSVP as real HTML text
+- do NOT flatten essential information into one poster image
+- use semantic headings
+- use descriptive link/button labels
+- create a comfortably sized CTA target, preferably at least 44 × 44 CSS pixels
+- ensure keyboard-visible links/buttons where supported
+
+For images:
+Create concise ALT TEXT.
+Informative image alt text must explain its purpose/content.
+Decorative images should use empty/null alt treatment where supported.
+Do not repeat surrounding text unnecessarily.
+
+Create an ALT-TEXT MANIFEST containing:
+asset name | purpose | recommended alt text | decorative yes/no.
+
+For PDF:
+Where supported, retain selectable text, meaningful reading order, tags/headings, descriptive links, and image descriptions.
+
+==================================================
+RESPONSIVE OUTPUT PRESETS
+==================================================
+
+Create ONE coherent master identity and adapt it intelligently to all formats.
+
+EMAIL HTML:
+Maximum main content width: approximately 660 px.
+Responsive single-column-first design.
+Source full-width hero images around 1320 px when appropriate, rendered responsively.
+Keep core information live in HTML.
+CTA must be a real clickable HTML button/link.
+Provide mobile stacking.
+Do not depend on hover interaction.
+Optimize images for email loading.
+
+WHATSAPP DIRECT-SHARE:
+1080 × 1350 px portrait PNG.
+Keep event brand, date, venue, and RSVP instruction visible without zooming.
+
+WHATSAPP STATUS:
+1080 × 1920 px vertical PNG.
+Adapt hierarchy rather than simply stretching/cropping the portrait artwork.
+Keep critical content away from extreme top/bottom interface areas.
+
+INSTAGRAM POST:
+Primary portrait: 1080 × 1350 px PNG.
+Also create 1080 × 1080 px square fallback if requested.
+
+INSTAGRAM STORY:
+1080 × 1920 px PNG.
+Use the same visual identity as the feed invitation.
+Prioritize event brand, date, venue, and RSVP.
+
+DIGITAL PDF:
+A5 portrait, 148 × 210 mm.
+Use RGB/sRGB for screen-first version.
+Clickable RSVP, map, email, and relevant social links.
+Retain selectable text whenever possible.
+
+PRINT PDF:
+A5 portrait and optional A4 portrait.
+Use high-resolution source assets.
+Use printer-specified CMYK/output profile.
+Embed fonts when possible.
+Add printer-specified bleed/crop settings.
+Prepare press-ready PDF/PDF-X output if supported.
+
+==================================================
+EXPORTS
+==================================================
+
+Deliver:
+
+1. Editable master invitation template.
+2. PNG — Instagram portrait 1080×1350.
+3. PNG — Instagram Story 1080×1920.
+4. PNG — WhatsApp direct-share 1080×1350.
+5. PNG — WhatsApp Status 1080×1920.
+6. Optional PNG — square social post 1080×1080.
+7. PDF — accessible digital A5.
+8. PDF — print-ready A5.
+9. Optional PDF — print-ready A4.
+10. HTML — responsive email invitation.
+11. Plain-text email fallback copy.
+12. Alt-text manifest.
+13. Color palette with HEX values.
+14. Typography/font list.
+15. Contrast/accessibility audit.
+16. Copy sheet containing headline, hook, description, CTA, reminder copy, tagline, and hashtag.
+17. Editable design notes listing every unresolved placeholder.
+
+==================================================
+FILE NAMING
+==================================================
+
+Use:
+
+[institution]_[event-brand]_[YYYY-MM-DD]_[channel]_[tone]_v01.ext
+
+Examples:
+
+[institution]_[event-brand]_[YYYY-MM-DD]_instagram-post_[tone]_v01.png
+[institution]_[event-brand]_[YYYY-MM-DD]_instagram-story_[tone]_v01.png
+[institution]_[event-brand]_[YYYY-MM-DD]_whatsapp-share_[tone]_v01.png
+[institution]_[event-brand]_[YYYY-MM-DD]_whatsapp-status_[tone]_v01.png
+[institution]_[event-brand]_[YYYY-MM-DD]_email_[tone]_v01.html
+[institution]_[event-brand]_[YYYY-MM-DD]_invite-digital_[tone]_v01.pdf
+[institution]_[event-brand]_[YYYY-MM-DD]_invite-print_[tone]_v01.pdf
+
+Use lowercase filenames, hyphens inside multiword field values, no spaces, and sequential version numbers.
+
+==================================================
+FINAL QUALITY CHECK BEFORE EXPORT
+==================================================
+
+Verify:
+
+□ [EVENT_BRAND] is spelled exactly as supplied.
+□ No unspecified detail has been fabricated.
+□ Institution logo is authentic and undistorted.
+□ Event brand, date, time, venue/event mode, and RSVP are visible immediately.
+□ Senior-alumni audience is reflected in typography, tone, imagery, and spacing.
+□ Copy does not sound like a college fest or generic corporate advertisement.
+□ No format feels like a mechanically cropped version of another.
+□ Normal text contrast is at least 4.5:1 and large text at least 3:1.
+□ Essential content remains live text in HTML.
+□ CTA is clearly identifiable and comfortably touchable.
+□ Every meaningful image has useful alt text.
+□ Decorative imagery does not receive distracting alt descriptions.
+□ RSVP URL works.
+□ Contact links work.
+□ Map link works when supplied.
+□ Social handles and hashtag are correct.
+□ PDF text remains selectable where supported.
+□ Print PDF is preflighted where supported.
+□ All unresolved placeholders are listed clearly before final delivery.
+
+DESIGN OBJECTIVE:
+The finished invitation should feel like a senior alumnus received a thoughtfully designed invitation from a respected institution—not a mass-produced template.
+
+Emotional result:
+“This is where part of my journey began, these are people worth seeing again, and this gathering is worth making time for.”
