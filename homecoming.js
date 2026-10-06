@@ -24,20 +24,23 @@
     if (document.hidden) music.pause();
     else if (gate.hidden && musicWanted) playMusic();
   });
-  let opening = false, openTimer, gateTimer, untieTimer;
+  let opening = false, openTimer, gateTimer, untieTimer, revealFocusTimer;
   const ceremony = $('ceremonial-reveal'), threadButton = $('untie-invitation'), ceremonyContent = $('ceremony-content');
   ceremony.classList.add('ready-to-unfold');
   ceremonyContent.setAttribute('aria-hidden', 'true');
   threadButton.addEventListener('click', () => {
-    if (ceremony.classList.contains('unfolded')) return;
-    ceremony.classList.add('unfolded');
-    ceremonyContent.removeAttribute('aria-hidden');
-    threadButton.setAttribute('aria-expanded', 'true');
+    if (ceremony.classList.contains('untying') || ceremony.classList.contains('unfolded')) return;
+    ceremony.classList.add('untying');
     threadButton.disabled = true;
     untieTimer = setTimeout(() => {
-      threadButton.hidden = true;
-      $('reminisce-title').focus();
-    }, reduced.matches ? 0 : 1750);
+      ceremony.classList.add('unfolded');
+      ceremonyContent.removeAttribute('aria-hidden');
+      threadButton.setAttribute('aria-expanded', 'true');
+      revealFocusTimer = setTimeout(() => {
+        threadButton.hidden = true;
+        $('reminisce-title').focus();
+      }, reduced.matches ? 0 : 900);
+    }, reduced.matches ? 0 : 2250);
   });
   const chapters = [...document.querySelectorAll('.memories, .quote-section, .the-letter, .come-home')];
   let chapterObserver;
@@ -64,14 +67,14 @@
     openTimer = setTimeout(finishOpening, reduced.matches ? 0 : 4250);
   }
   function resetLetter() {
-    clearTimeout(openTimer); clearTimeout(gateTimer); clearTimeout(untieTimer); opening = false; seal.disabled = false;
+    clearTimeout(openTimer); clearTimeout(gateTimer); clearTimeout(untieTimer); clearTimeout(revealFocusTimer); opening = false; seal.disabled = false;
     window.scrollTo({top:0,behavior:'instant'});
     gate.hidden = false; gate.classList.remove('opening','departed');
     document.body.classList.add('sealed'); main.inert = true;
     main.classList.remove('invitation-awake');
     if (chapterObserver) chapterObserver.disconnect();
     chapters.forEach(chapter => chapter.classList.remove('chapter-entered'));
-    ceremony.classList.remove('unfolded');
+    ceremony.classList.remove('untying', 'unfolded');
     ceremonyContent.setAttribute('aria-hidden', 'true');
     threadButton.hidden = false; threadButton.disabled = false;
     threadButton.setAttribute('aria-expanded', 'false');

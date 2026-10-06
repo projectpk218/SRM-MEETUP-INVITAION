@@ -68,28 +68,35 @@ h1,h2,h3{font-weight:500}
 @keyframes line-draw{to{stroke-dashoffset:0}}
 .the-letter{background:linear-gradient(180deg,#fff 0 430px,#fffaf1 650px,#fbf4e6 1000px)}
 .ceremonial-reveal{overflow:hidden}
-.invitation-thread{display:none;position:absolute;top:145px;left:4%;right:4%;height:126px;z-index:4;pointer-events:auto;overflow:hidden;filter:drop-shadow(0 3px 3px #795f3e45);background:transparent;color:var(--ink);padding:0;cursor:pointer}
-.ready-to-unfold .invitation-thread{display:block;opacity:1;transition:opacity .4s ease 1.55s}
+.invitation-thread{display:none;position:absolute;top:100px;left:3%;right:3%;height:260px;z-index:4;pointer-events:auto;overflow:hidden;background:transparent;color:var(--ink);padding:0;cursor:pointer;filter:drop-shadow(0 5px 4px #62421e55)}
+.ready-to-unfold .invitation-thread{display:block;opacity:1;transition:opacity .48s ease}
 .unfolded .invitation-thread{opacity:0;pointer-events:none}
-.thread-end{position:absolute;top:45px;width:calc(50% - 52px);height:2px}
-.thread-end-left{left:0;background:linear-gradient(90deg,#b6874377,#b68743)}
-.thread-end-right{right:0;background:linear-gradient(90deg,#b68743,#b6874377)}
-.thread-bow{position:absolute;left:50%;top:0;width:160px;height:90px;transform:translateX(-50%);overflow:visible}
-.invitation-thread:hover .thread-bow{transform:translateX(-50%) scale(1.05)}
-.thread-prompt{position:absolute;left:50%;top:92px;transform:translateX(-50%);white-space:nowrap;font:600 14px/1.5 var(--sans);letter-spacing:.04em;color:#765b39}
-.thread-bow path{fill:none;stroke:#b68743;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.thread-bow .thread-knot{fill:#c99b56;stroke:#a47735;stroke-width:1.5}
+.thread-end{position:absolute;top:93px;width:calc(50% - 121px);height:5px;border-radius:6px;background:linear-gradient(#d8b06e 0 27%,#8a5c30 60%,#e0bb7b);box-shadow:0 2px 2px #53391d55}
+.thread-end-left{left:0;transform-origin:right center}
+.thread-end-right{right:0;transform-origin:left center}
+.thread-bow{position:absolute;left:50%;top:0;width:340px;height:196px;transform:translateX(-50%);overflow:visible;filter:drop-shadow(0 4px 2px #58371355)}
+.invitation-thread:hover .thread-bow{transform:translateX(-50%) scale(1.04)}
+.thread-prompt{position:absolute;left:50%;top:210px;transform:translateX(-50%);white-space:nowrap;font:600 15px/1.5 var(--sans);letter-spacing:.035em;color:#6d4d2c}
+.thread-bow path{fill:none;stroke:#a97035;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round}
+.thread-bow .thread-crossing{stroke:#dfb978;stroke-width:3.8}
+.thread-bow .thread-knot{fill:#bc8847;stroke:#76502b;stroke-width:2}
 .thread-loop,.thread-tail{transform-box:fill-box;transform-origin:center}
-.unfolded .thread-end-left{animation:thread-slide-left 1.5s .15s ease-in-out both}
-.unfolded .thread-end-right{animation:thread-slide-right 1.5s .15s ease-in-out both}
-.unfolded .thread-loop-left,.unfolded .thread-tail-left{animation:thread-loosen-left 1.25s ease-in-out both}
-.unfolded .thread-loop-right,.unfolded .thread-tail-right{animation:thread-loosen-right 1.25s ease-in-out both}
-.unfolded .thread-knot{animation:thread-knot-release .9s .15s ease-out both}
-@keyframes thread-slide-left{35%{transform:translateX(-8%) scaleX(1.06)}100%{transform:translateX(-115%) scaleX(.6);opacity:0}}
-@keyframes thread-slide-right{35%{transform:translateX(8%) scaleX(1.06)}100%{transform:translateX(115%) scaleX(.6);opacity:0}}
-@keyframes thread-loosen-left{35%{transform:translate(-8px,-8px) rotate(-14deg)}100%{transform:translate(-42px,-23px) rotate(-40deg) scale(.7);opacity:0}}
-@keyframes thread-loosen-right{35%{transform:translate(8px,-8px) rotate(14deg)}100%{transform:translate(42px,-23px) rotate(40deg) scale(.7);opacity:0}}
-@keyframes thread-knot-release{40%{transform:scale(.8);opacity:1}100%{transform:scale(.2);opacity:0}}
+.untying .thread-prompt{animation:cord-prompt-away .3s ease both}
+.untying .thread-end-right{animation:cord-pull-right 2.15s cubic-bezier(.3,.05,.2,1) both}
+.untying .thread-end-left{animation:cord-recoil-left 2.15s cubic-bezier(.3,.05,.2,1) both}
+.untying .thread-tail-right{animation:cord-tail-pull 2.15s cubic-bezier(.3,.05,.2,1) both}
+.untying .thread-tail-left{animation:cord-tail-loosen 2.15s ease both}
+.untying .thread-loop-right{animation:cord-loop-slip-right 2.15s cubic-bezier(.3,.05,.2,1) both}
+.untying .thread-loop-left{animation:cord-loop-slip-left 2.15s cubic-bezier(.3,.05,.2,1) both}
+.untying .thread-crossing,.untying .thread-knot{animation:cord-knot-release 2.15s ease both}
+@keyframes cord-prompt-away{to{opacity:0;transform:translate(-50%,8px)}}
+@keyframes cord-pull-right{0%,15%{transform:none}30%{transform:translateX(6%) scaleX(1.05)}55%{transform:translateX(20%) scaleX(1.16)}76%{transform:translateX(60%) scaleX(.9)}100%{transform:translateX(130%);opacity:0}}
+@keyframes cord-recoil-left{0%,22%{transform:none}47%{transform:translateX(-2%)}74%{transform:translateX(-37%) scaleX(.82)}100%{transform:translateX(-120%);opacity:0}}
+@keyframes cord-tail-pull{0%,15%{transform:none}36%{transform:translate(15px,5px) rotate(9deg)}62%{transform:translate(60px,19px) rotate(20deg)}100%{transform:translate(150px,38px) rotate(27deg);opacity:0}}
+@keyframes cord-tail-loosen{0%,35%{transform:none}65%{transform:translate(-17px,9px) rotate(-8deg)}100%{transform:translate(-80px,33px) rotate(-25deg);opacity:0}}
+@keyframes cord-loop-slip-right{0%,24%{transform:none}43%{transform:translate(5px,-3px) rotate(6deg) scale(1.06)}70%{transform:translate(44px,5px) rotate(20deg) scale(.6)}100%{transform:translate(105px,21px) rotate(34deg) scale(.12);opacity:0}}
+@keyframes cord-loop-slip-left{0%,34%{transform:none}56%{transform:translate(-3px,3px) rotate(-6deg) scale(1.13)}76%{transform:translate(-31px,10px) rotate(-14deg) scale(.74)}100%{transform:translate(-90px,26px) rotate(-30deg) scale(.2);opacity:0}}
+@keyframes cord-knot-release{0%,42%{opacity:1;transform:none}63%{transform:scale(.88)}84%{opacity:1;transform:scale(.35)}100%{opacity:0;transform:scale(.1)}}
 .ready-to-unfold .ceremony-content{opacity:0;transform:translateY(14px) scale(.985);filter:blur(3px);transition:opacity 1.05s ease .65s,transform 1.15s ease .65s,filter 1.05s ease .65s}
 .unfolded .ceremony-content{opacity:1;transform:none;filter:none}
 .official-marks{position:relative}
@@ -105,10 +112,10 @@ h1,h2,h3{font-weight:500}
 .practical-actions button:hover,.practical-actions a:hover{transform:translateY(-3px);box-shadow:0 8px 20px #193e3826}
 
 @media(max-width:600px){
-  .invitation-thread{top:132px;left:0;right:0;height:115px}
-  .thread-end{top:38px;width:calc(50% - 43px)}
-  .thread-bow{width:136px;height:76px}
-  .thread-prompt{top:79px;font-size:13px;letter-spacing:.01em}
+  .invitation-thread{top:89px;left:0;right:0;height:225px}
+  .thread-end{top:78px;width:calc(50% - 101px);height:4px}
+  .thread-bow{width:285px;height:164px}
+  .thread-prompt{top:180px;font-size:13px;letter-spacing:.01em}
   .arrival-copy h1{font-size:clamp(42px,11vw,53px)}
   .letter-peek{padding:17px 12px 24px}
   .letter-peek span{font-size:17px}
