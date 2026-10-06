@@ -1,7 +1,0 @@
-asset name,purpose,recommended alt text,decorative
-institution-logo.png,Official institution identity,[INSTITUTION],no
-event-mark.png,Optional mark beside live event title,,yes
-hero-photo.png,Approved authentic campus or alumni photograph,[HERO_IMAGE_ALT] - describe the actual supplied photograph,no
-connection-motif,Abstract lines representing reconnection,,yes
-social-portrait.png,Complete invitation,"Invitation to [EVENT_BRAND] at [INSTITUTION] on [EVENT_DATE], [EVENT_TIME] [TIME_ZONE], [VENUE_NAME]. RSVP by [RSVP_DEADLINE]: [RSVP_URL]. Include program and contact details in accompanying text.",no
-social-story.png,Complete vertical invitation,Use the portrait alternative and include any additional program details in accompanying text,no
