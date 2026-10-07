@@ -24,69 +24,80 @@
     if (document.hidden) music.pause();
     else if (gate.hidden && musicWanted) playMusic();
   });
-  let opening = false, openTimer, gateTimer, untieTimer, revealFocusTimer, untieFrame;
+  let opening = false, openTimer, gateTimer, revealFocusTimer, untieFrame;
   const ceremony = $('ceremonial-reveal'), threadButton = $('untie-invitation'), ceremonyContent = $('ceremony-content');
-  const cordParts = [
-    {selector: '.thread-loop-left', draw: v => `M${v[0]} ${v[1]} C${v[2]} ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]} C${v[8]} ${v[9]} ${v[10]} ${v[11]} ${v[12]} ${v[13]}`, frames: [
-      [130,72,104,27,46,19,37,59,29,96,82,113,130,72],
-      [130,72,103,35,54,20,43,60,36,92,89,106,130,72],
-      [130,72,98,20,24,20,23,61,18,108,89,112,130,72],
-      [130,72,100,70,66,71,32,72,13,72,-4,72,-28,72]
-    ]},
-    {selector: '.thread-loop-right', draw: v => `M${v[0]} ${v[1]} C${v[2]} ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]} C${v[8]} ${v[9]} ${v[10]} ${v[11]} ${v[12]} ${v[13]}`, frames: [
-      [130,72,156,27,214,19,223,59,231,96,178,113,130,72],
-      [130,72,160,20,229,13,238,61,241,99,171,111,130,72],
-      [130,72,150,51,177,52,179,69,181,87,151,89,130,72],
-      [130,72,168,70,207,71,240,72,261,72,282,72,303,72]
-    ]},
-    {selector: '.thread-tail-left', draw: v => `M${v[0]} ${v[1]} C${v[2]} ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]}`, frames: [
-      [127,77,97,87,65,110,27,124],
-      [126,76,99,85,60,113,8,139],
-      [129,74,91,80,46,96,-30,109],
-      [130,72,78,73,16,74,-44,75]
-    ]},
-    {selector: '.thread-tail-right', draw: v => `M${v[0]} ${v[1]} C${v[2]} ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]}`, frames: [
-      [133,77,163,87,195,110,233,124],
-      [136,78,174,92,220,120,268,141],
-      [134,75,176,83,236,93,297,102],
-      [130,72,182,73,244,74,312,75]
-    ]}
-  ].map(part => ({...part, element: threadButton.querySelector(part.selector)}));
-  function drawCord(progress) {
-    const marks = [0, .25, .62, 1];
-    const segment = progress < marks[1] ? 0 : progress < marks[2] ? 1 : 2;
-    const amount = (progress - marks[segment]) / (marks[segment + 1] - marks[segment]);
-    const eased = amount * amount * (3 - 2 * amount);
-    cordParts.forEach(part => {
-      const from = part.frames[segment], to = part.frames[segment + 1];
-      part.element.setAttribute('d', part.draw(from.map((value, i) => +(value + (to[i] - value) * eased).toFixed(1))));
-    });
+  const cords = Object.fromEntries([...threadButton.querySelectorAll('[data-cord]')].map(group => [group.dataset.cord, {group, path: $('cord-' + group.dataset.cord)}]));
+  const mix = (a, b, t) => a + (b - a) * t;
+  const phase = (t, start, end) => {
+    const p = Math.max(0, Math.min(1, (t - start) / (end - start)));
+    return p * p * (3 - 2 * p);
+  };
+  const point = (x, y) => `${x.toFixed(2)} ${y.toFixed(2)}`;
+  let cordHalfWidth = 197;
+  function measureCord() {
+    const bowWidth = threadButton.querySelector('.thread-bow').getBoundingClientRect().width;
+    if (bowWidth) cordHalfWidth = threadButton.querySelector('.thread-keepsake').offsetWidth * 130 / bowWidth;
+    if (!ceremony.classList.contains('untying')) drawCord(0);
+  }
+  function strand(name, d, opacity = 1) {
+    cords[name].path.setAttribute('d', d);
+    cords[name].group.style.opacity = opacity;
+  }
+  // The loops retract into a shared knot anchor as their free ends lengthen.
+  // Only after both bights clear the crossing do the two loose cords peel away.
+  function drawCord(t) {
+    const tension = phase(t, .02, .16), rightPull = phase(t, .17, .47), leftPull = phase(t, .43, .67);
+    const release = phase(t, .68, 1), unwind = phase(t, .48, .69);
+    const x = 130 + tension * 3 + rightPull * 4 - leftPull * 5, y = 82 + tension * 2;
+    const leftX = x - release * 540, rightX = x + 4 + release * 540;
+    const settle = Math.sin(release * Math.PI) * (1 - release);
+    const leftY = y + settle * 100, rightY = y + settle * 76;
+    const sway = Math.sin(release * Math.PI * 3) * (1 - release) * release * 16;
+    strand('standing-left', `M${point(leftX - cordHalfWidth, 82 + settle * 25)} C${point(leftX - cordHalfWidth * .65, 82 + settle * 55)} ${point(leftX - 82, leftY - 7 + sway)} ${point(leftX, leftY)}`);
+    strand('standing-right', `M${point(rightX + cordHalfWidth - 4, 82 + settle * 20)} C${point(rightX + cordHalfWidth * .65, 82 + settle * 40)} ${point(rightX + 85, rightY - 7 - sway)} ${point(rightX, rightY)}`);
+    const leftSize = (1 + rightPull * .1) * (1 - leftPull), rightSize = 1 - rightPull;
+    strand('loop-left', `M${point(leftX, leftY - 3)} C${point(leftX - 41 * leftSize, leftY - 39 * leftSize)} ${point(leftX - 70 * leftSize, leftY - 58 * leftSize)} ${point(leftX - 93 * leftSize, leftY - 35 * leftSize)} C${point(leftX - 118 * leftSize, leftY - 2 * leftSize)} ${point(leftX - 59 * leftSize, leftY + 21 * leftSize)} ${point(leftX, leftY + 4)}`, phase(leftSize, .015, .085));
+    strand('loop-right', `M${point(rightX, rightY - 3)} C${point(rightX + 35 * rightSize, rightY - 44 * rightSize)} ${point(rightX + 73 * rightSize, rightY - 56 * rightSize)} ${point(rightX + 90 * rightSize, rightY - 36 * rightSize)} C${point(rightX + 117 * rightSize, rightY - 2 * rightSize)} ${point(rightX + 53 * rightSize, rightY + 21 * rightSize)} ${point(rightX, rightY + 4)}`, phase(rightSize, .015, .085));
+    const leftEndX = leftX - 66 - leftPull * 122, rightEndX = rightX + 79 + rightPull * 124;
+    strand('tail-left', `M${point(leftX - 1, leftY + 3)} C${point(leftX - 26 - leftPull * 28, leftY + mix(32, 16, leftPull) + sway)} ${point(leftEndX + mix(53, 48, leftPull), leftY + mix(63, 39, leftPull) + settle * 55)} ${point(leftEndX, leftY + 83 - leftPull * 24 + settle * 82)}`);
+    strand('tail-right', `M${point(rightX, rightY + 3)} C${point(rightX + 31 + rightPull * 25, rightY + mix(30, 11, rightPull) - sway)} ${point(rightEndX - 37, rightY + mix(65, 29, rightPull) + settle * 40)} ${point(rightEndX, rightY + 84 - rightPull * 39 + settle * 65)}`);
+    const knotOpacity = 1 - phase(t, .62, .70);
+    strand('binding', `M${point(x - 6, y - 8)} C${point(x + 10 + unwind * 14, y - 18 + unwind * 22)} ${point(x + 14 + unwind * 30, y + 3 + unwind * 15)} ${point(x + 3 + unwind * 43, y + 9 + unwind * 15)} C${point(x - 5 + unwind * 55, y + 12)} ${point(x - 8 + unwind * 65, y + 4)} ${point(x - 5 + unwind * 74, y - 4)}`, knotOpacity);
+    strand('crossing', `M${point(x - 7 - unwind * 12, y + 6)} C${point(x - 7, y + 1)} ${point(x + unwind * 16, y - 5)} ${point(x + 9 + unwind * 22, y - 7)}`, knotOpacity);
+    ceremony.style.setProperty('--cord-release', release.toFixed(3));
+    threadButton.style.setProperty('--cord-lift', `${(tension * (1 - unwind) * 2).toFixed(2)}px`);
+  }
+  function revealInvitation() {
+    if (ceremony.classList.contains('unfolded')) return;
+    ceremony.classList.add('unfolded');
+    ceremonyContent.removeAttribute('aria-hidden');
+    ceremonyContent.inert = false;
+    threadButton.setAttribute('aria-expanded', 'true');
+    revealFocusTimer = setTimeout(() => {
+      threadButton.hidden = true;
+      $('reminisce-title').focus({preventScroll:true});
+    }, reduced.matches ? 0 : 1300);
   }
   function pullCord() {
     const start = performance.now();
     function frame(now) {
-      const progress = Math.min(1, (now - start) / 3000);
+      const progress = reduced.matches ? 1 : Math.min(1, (now - start) / 4800);
       drawCord(progress);
+      if (progress >= .92) revealInvitation();
       if (progress < 1) untieFrame = requestAnimationFrame(frame);
     }
     untieFrame = requestAnimationFrame(frame);
   }
   ceremony.classList.add('ready-to-unfold');
+  measureCord();
+  window.addEventListener('resize', measureCord);
   ceremonyContent.setAttribute('aria-hidden', 'true');
+  ceremonyContent.inert = true;
   threadButton.addEventListener('click', () => {
     if (ceremony.classList.contains('untying') || ceremony.classList.contains('unfolded')) return;
     ceremony.classList.add('untying');
     threadButton.disabled = true;
-    if (!reduced.matches) pullCord();
-    untieTimer = setTimeout(() => {
-      ceremony.classList.add('unfolded');
-      ceremonyContent.removeAttribute('aria-hidden');
-      threadButton.setAttribute('aria-expanded', 'true');
-      revealFocusTimer = setTimeout(() => {
-        threadButton.hidden = true;
-        $('reminisce-title').focus();
-      }, reduced.matches ? 0 : 900);
-    }, reduced.matches ? 0 : 3000);
+    if (reduced.matches) revealInvitation(); else pullCord();
   });
   const chapters = [...document.querySelectorAll('.memories, .quote-section, .the-letter, .come-home')];
   let chapterObserver;
@@ -113,7 +124,7 @@
     openTimer = setTimeout(finishOpening, reduced.matches ? 0 : 4250);
   }
   function resetLetter() {
-    clearTimeout(openTimer); clearTimeout(gateTimer); clearTimeout(untieTimer); clearTimeout(revealFocusTimer); cancelAnimationFrame(untieFrame); drawCord(0); opening = false; seal.disabled = false;
+    clearTimeout(openTimer); clearTimeout(gateTimer); clearTimeout(revealFocusTimer); cancelAnimationFrame(untieFrame); drawCord(0); opening = false; seal.disabled = false;
     window.scrollTo({top:0,behavior:'instant'});
     gate.hidden = false; gate.classList.remove('opening','departed');
     document.body.classList.add('sealed'); main.inert = true;
@@ -122,6 +133,7 @@
     chapters.forEach(chapter => chapter.classList.remove('chapter-entered'));
     ceremony.classList.remove('untying', 'unfolded');
     ceremonyContent.setAttribute('aria-hidden', 'true');
+    ceremonyContent.inert = true;
     threadButton.hidden = false; threadButton.disabled = false;
     threadButton.setAttribute('aria-expanded', 'false');
     musicToggle.hidden = true; music.pause();

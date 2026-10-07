@@ -68,29 +68,25 @@ h1,h2,h3{font-weight:500}
 @keyframes line-draw{to{stroke-dashoffset:0}}
 .the-letter{background:linear-gradient(180deg,#fff 0 430px,#fffaf1 650px,#fbf4e6 1000px)}
 .ceremonial-reveal{overflow:hidden}
-.invitation-thread{display:none;position:absolute;top:100px;left:3%;right:3%;height:260px;z-index:4;pointer-events:auto;overflow:hidden;background:transparent;color:var(--ink);padding:0;cursor:pointer;filter:drop-shadow(0 5px 4px #62421e55)}
-.ready-to-unfold .invitation-thread{display:block;opacity:1;transition:opacity .48s ease}
+
+/* Layered cotton cord. Shared SVG paths keep every fibre and shadow attached. */
+.invitation-thread{display:none;position:absolute;top:48px;left:0;right:0;height:420px;z-index:4;pointer-events:auto;overflow:hidden;background:transparent;color:var(--ink);padding:0;cursor:pointer;isolation:isolate;-webkit-tap-highlight-color:transparent}
+.ready-to-unfold .invitation-thread{display:block;opacity:1;transition:opacity .6s ease}
 .unfolded .invitation-thread{opacity:0;pointer-events:none}
-.thread-end{position:absolute;top:93px;width:calc(50% - 121px);height:5px;border-radius:6px;background:linear-gradient(#d8b06e 0 27%,#8a5c30 60%,#e0bb7b);box-shadow:0 2px 2px #53391d55}
-.thread-end-left{left:0;transform-origin:right center}
-.thread-end-right{right:0;transform-origin:left center}
-.thread-bow{position:absolute;left:50%;top:0;width:340px;height:196px;transform:translateX(-50%);overflow:visible;filter:drop-shadow(0 4px 2px #58371355)}
-.invitation-thread:hover .thread-bow{transform:translateX(-50%) scale(1.04)}
-.thread-prompt{position:absolute;left:50%;top:210px;transform:translateX(-50%);white-space:nowrap;font:600 15px/1.5 var(--sans);letter-spacing:.035em;color:#6d4d2c}
-.thread-bow path{fill:none;stroke:#a97035;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round}
-.thread-bow .thread-crossing{stroke:#dfb978;stroke-width:3.8}
-.thread-bow .thread-knot{fill:#bc8847;stroke:#76502b;stroke-width:2}
-.thread-crossing,.thread-knot{transform-box:fill-box;transform-origin:center}
-.untying .thread-prompt{animation:cord-prompt-away .35s ease both}
-.untying .thread-end-right{animation:cord-pull-right 3s cubic-bezier(.22,.7,.18,1) both}
-.untying .thread-end-left{animation:cord-recoil-left 3s cubic-bezier(.22,.7,.18,1) both}
-.untying .thread-crossing,.untying .thread-knot{animation:cord-center-release 3s ease both}
-.untying .thread-bow{animation:cord-bow-release 3s linear both}
-@keyframes cord-prompt-away{to{opacity:0;transform:translate(-50%,8px)}}
-@keyframes cord-pull-right{0%,10%{transform:none}25%{transform:translateX(12px) scaleX(1.02)}60%{transform:translateX(30px) scaleX(1.08)}82%{transform:translateX(70px) scaleX(.9)}100%{transform:translateX(120vw);opacity:0}}
-@keyframes cord-recoil-left{0%,25%{transform:none}55%{transform:translateX(-7px) scaleX(1.03)}75%{transform:translateX(-22px)}100%{transform:translateX(-120vw);opacity:0}}
-@keyframes cord-center-release{0%,28%{opacity:1;transform:none}48%{transform:translateX(4px) scale(.9)}65%{opacity:1;transform:translateX(12px) scale(.5)}78%,100%{opacity:0;transform:translateX(24px) scale(.15)}}
-@keyframes cord-bow-release{0%,83%{opacity:1}100%{opacity:0}}
+.thread-keepsake{position:absolute;top:18px;left:50%;width:min(82%,560px);height:300px;transform:translateX(-50%) rotate(-1deg);background:linear-gradient(145deg,#fffdf6,#f7edda);border:1px solid #cfb78b80;box-shadow:0 12px 24px #59391e14,0 3px 5px #59391e14,inset 0 0 0 5px #fffaf2,inset 0 0 0 6px #cbb68f55;transition:opacity .7s,transform .9s}
+.thread-keepsake:after{content:'';position:absolute;inset:12px;border:1px solid #c6a7774d;pointer-events:none}
+.thread-keepsake>span{position:absolute;top:29px;left:0;right:0;font:italic 25px/1.3 var(--serif);color:#8a6a41;letter-spacing:-.02em}
+.thread-keepsake>i{position:absolute;bottom:20px;left:0;right:0;font-size:15px;color:#b5945e;font-style:normal}
+.thread-bow{position:absolute;left:50%;top:66px;width:370px;height:285px;transform:translateX(-50%) translateY(calc(-1 * var(--cord-lift,0px)));overflow:visible;pointer-events:none}
+.cord-edge{stroke:#775329;stroke-width:6.6}
+.cord-body{stroke:#bc9256;stroke-width:5.4}
+.cord-light{stroke:#edce91;stroke-width:2.6;transform:translateY(-1px)}
+.cord-texture{stroke:url(#cord-fibres);stroke-width:5.8}
+.invitation-thread:focus-visible{outline:2px solid var(--gold);outline-offset:-4px;border-radius:8px}
+.thread-prompt{position:absolute;left:0;right:0;top:359px;font:500 14px/1.5 var(--sans);letter-spacing:.045em;color:#715535;transition:opacity .3s}
+.invitation-thread:not(:disabled):hover .thread-prompt{color:var(--ink)}
+.untying .thread-prompt{opacity:0}
+.untying .thread-keepsake{opacity:calc(1 - var(--cord-release,0));transform:translateX(-50%) translateY(calc(var(--cord-release,0) * 25px)) rotate(calc(-1deg + var(--cord-release,0) * 1deg))}
 .ready-to-unfold .ceremony-content{opacity:0;transform:translateY(14px) scale(.985);filter:blur(3px);transition:opacity 1.05s ease .65s,transform 1.15s ease .65s,filter 1.05s ease .65s}
 .unfolded .ceremony-content{opacity:1;transform:none;filter:none}
 .official-marks{position:relative}
@@ -106,10 +102,11 @@ h1,h2,h3{font-weight:500}
 .practical-actions button:hover,.practical-actions a:hover{transform:translateY(-3px);box-shadow:0 8px 20px #193e3826}
 
 @media(max-width:600px){
-  .invitation-thread{top:89px;left:0;right:0;height:225px}
-  .thread-end{top:78px;width:calc(50% - 101px);height:4px}
-  .thread-bow{width:285px;height:164px}
-  .thread-prompt{top:180px;font-size:13px;letter-spacing:.01em}
+  .invitation-thread{top:48px;height:365px}
+  .thread-keepsake{width:94%;height:266px;top:8px}
+  .thread-keepsake>span{top:28px;font-size:22px}
+  .thread-bow{width:min(300px,86vw);height:auto;aspect-ratio:260/200;top:59px}
+  .thread-prompt{top:316px;font-size:13px;letter-spacing:.02em}
   .arrival-copy h1{font-size:clamp(42px,11vw,53px)}
   .letter-peek{padding:17px 12px 24px}
   .letter-peek span{font-size:17px}
