@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 /* A legible keepsake face for the formal invitation; handwriting stays an accent. */
 :root{--serif:'Fraunces',Georgia,serif;--hand:'Caveat','Segoe Print',cursive;--ink:#183d38;--night:#153935;--paper:#fbf4e6;--copper:#9b5138;--gold:#b68743}
 body{font-size:15px;line-height:1.65}
@@ -7,7 +8,8 @@ h1,h2,h3{font-weight:500}
 .arrival-copy>p:last-child,.hero-note{line-height:1.55}
 .home-hero h1{font-size:clamp(60px,8vw,104px)}
 .memories h2,.come-home h2{letter-spacing:-.04em;line-height:1.14}
-.letter-heading h2{font-size:clamp(57px,8.5vw,101px);letter-spacing:-.055em}
+.letter-heading h2{font-family:'Kaushan Script','Caveat',cursive;font-size:clamp(57px,8.5vw,101px);font-weight:400;letter-spacing:-.055em}
+.faculty-name{font-size:16px}
 #reminisce-title:focus{outline:none}
 .memory-words,.reunion-moments>p{line-height:1.6}
 .overline,.institution-name,.faculty-name{letter-spacing:.095em}
@@ -119,6 +121,7 @@ h1,h2,h3{font-weight:500}
   .quote-section p{font-size:clamp(32px,8.5vw,42px)}
   .letter-heading>.handwritten{font-size:28px}
   .letter-heading h2{font-size:clamp(51px,13.2vw,74px)}
+  .faculty-name{font-size:14px}
   .official-marks{gap:12px}
   .official-marks img{width:37px}
   .official-marks .main-mark{width:min(43vw,174px)}

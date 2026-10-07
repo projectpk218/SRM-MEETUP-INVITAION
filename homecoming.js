@@ -168,7 +168,7 @@
   $('directions-link').href=event.mapUrl;
   $('share-button').addEventListener('click',async()=>{
     const url=location.origin+location.pathname;
-    try { if(navigator.share) await navigator.share({title:'Reminisce’26 — You’ve been missed.',text:'We left with dreams. Let’s return with stories. SRM alumni homecoming · 17 October 2026.',url}); else {await navigator.clipboard.writeText(url);$('action-message').textContent='Invitation link copied. Send a little nostalgia to an old friend.';} }
+    try { if(navigator.share) await navigator.share({title:'Reminisce’26 — You’ve been missed.',text:'We left with dreams. Let’s return with stories. SRM alumni homecoming · 17 October 2026.',url}); else {await navigator.clipboard.writeText(url);$('action-message').textContent='Invitation link copied. Send a little nostalgia to your friends.';} }
     catch(error){if(error.name!=='AbortError')$('action-message').textContent='Share this invitation: '+url;}
   });
   countdown();setInterval(countdown,1000);
