@@ -80,23 +80,17 @@ h1,h2,h3{font-weight:500}
 .thread-bow path{fill:none;stroke:#a97035;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round}
 .thread-bow .thread-crossing{stroke:#dfb978;stroke-width:3.8}
 .thread-bow .thread-knot{fill:#bc8847;stroke:#76502b;stroke-width:2}
-.thread-loop,.thread-tail{transform-box:fill-box;transform-origin:center}
-.untying .thread-prompt{animation:cord-prompt-away .3s ease both}
-.untying .thread-end-right{animation:cord-pull-right 2.15s cubic-bezier(.3,.05,.2,1) both}
-.untying .thread-end-left{animation:cord-recoil-left 2.15s cubic-bezier(.3,.05,.2,1) both}
-.untying .thread-tail-right{animation:cord-tail-pull 2.15s cubic-bezier(.3,.05,.2,1) both}
-.untying .thread-tail-left{animation:cord-tail-loosen 2.15s ease both}
-.untying .thread-loop-right{animation:cord-loop-slip-right 2.15s cubic-bezier(.3,.05,.2,1) both}
-.untying .thread-loop-left{animation:cord-loop-slip-left 2.15s cubic-bezier(.3,.05,.2,1) both}
-.untying .thread-crossing,.untying .thread-knot{animation:cord-knot-release 2.15s ease both}
+.thread-crossing,.thread-knot{transform-box:fill-box;transform-origin:center}
+.untying .thread-prompt{animation:cord-prompt-away .35s ease both}
+.untying .thread-end-right{animation:cord-pull-right 3s cubic-bezier(.22,.7,.18,1) both}
+.untying .thread-end-left{animation:cord-recoil-left 3s cubic-bezier(.22,.7,.18,1) both}
+.untying .thread-crossing,.untying .thread-knot{animation:cord-center-release 3s ease both}
+.untying .thread-bow{animation:cord-bow-release 3s linear both}
 @keyframes cord-prompt-away{to{opacity:0;transform:translate(-50%,8px)}}
-@keyframes cord-pull-right{0%,15%{transform:none}30%{transform:translateX(6%) scaleX(1.05)}55%{transform:translateX(20%) scaleX(1.16)}76%{transform:translateX(60%) scaleX(.9)}100%{transform:translateX(130%);opacity:0}}
-@keyframes cord-recoil-left{0%,22%{transform:none}47%{transform:translateX(-2%)}74%{transform:translateX(-37%) scaleX(.82)}100%{transform:translateX(-120%);opacity:0}}
-@keyframes cord-tail-pull{0%,15%{transform:none}36%{transform:translate(15px,5px) rotate(9deg)}62%{transform:translate(60px,19px) rotate(20deg)}100%{transform:translate(150px,38px) rotate(27deg);opacity:0}}
-@keyframes cord-tail-loosen{0%,35%{transform:none}65%{transform:translate(-17px,9px) rotate(-8deg)}100%{transform:translate(-80px,33px) rotate(-25deg);opacity:0}}
-@keyframes cord-loop-slip-right{0%,24%{transform:none}43%{transform:translate(5px,-3px) rotate(6deg) scale(1.06)}70%{transform:translate(44px,5px) rotate(20deg) scale(.6)}100%{transform:translate(105px,21px) rotate(34deg) scale(.12);opacity:0}}
-@keyframes cord-loop-slip-left{0%,34%{transform:none}56%{transform:translate(-3px,3px) rotate(-6deg) scale(1.13)}76%{transform:translate(-31px,10px) rotate(-14deg) scale(.74)}100%{transform:translate(-90px,26px) rotate(-30deg) scale(.2);opacity:0}}
-@keyframes cord-knot-release{0%,42%{opacity:1;transform:none}63%{transform:scale(.88)}84%{opacity:1;transform:scale(.35)}100%{opacity:0;transform:scale(.1)}}
+@keyframes cord-pull-right{0%,10%{transform:none}25%{transform:translateX(12px) scaleX(1.02)}60%{transform:translateX(30px) scaleX(1.08)}82%{transform:translateX(70px) scaleX(.9)}100%{transform:translateX(120vw);opacity:0}}
+@keyframes cord-recoil-left{0%,25%{transform:none}55%{transform:translateX(-7px) scaleX(1.03)}75%{transform:translateX(-22px)}100%{transform:translateX(-120vw);opacity:0}}
+@keyframes cord-center-release{0%,28%{opacity:1;transform:none}48%{transform:translateX(4px) scale(.9)}65%{opacity:1;transform:translateX(12px) scale(.5)}78%,100%{opacity:0;transform:translateX(24px) scale(.15)}}
+@keyframes cord-bow-release{0%,83%{opacity:1}100%{opacity:0}}
 .ready-to-unfold .ceremony-content{opacity:0;transform:translateY(14px) scale(.985);filter:blur(3px);transition:opacity 1.05s ease .65s,transform 1.15s ease .65s,filter 1.05s ease .65s}
 .unfolded .ceremony-content{opacity:1;transform:none;filter:none}
 .official-marks{position:relative}

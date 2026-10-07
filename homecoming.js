@@ -24,14 +24,60 @@
     if (document.hidden) music.pause();
     else if (gate.hidden && musicWanted) playMusic();
   });
-  let opening = false, openTimer, gateTimer, untieTimer, revealFocusTimer;
+  let opening = false, openTimer, gateTimer, untieTimer, revealFocusTimer, untieFrame;
   const ceremony = $('ceremonial-reveal'), threadButton = $('untie-invitation'), ceremonyContent = $('ceremony-content');
+  const cordParts = [
+    {selector: '.thread-loop-left', draw: v => `M${v[0]} ${v[1]} C${v[2]} ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]} C${v[8]} ${v[9]} ${v[10]} ${v[11]} ${v[12]} ${v[13]}`, frames: [
+      [130,72,104,27,46,19,37,59,29,96,82,113,130,72],
+      [130,72,103,35,54,20,43,60,36,92,89,106,130,72],
+      [130,72,98,20,24,20,23,61,18,108,89,112,130,72],
+      [130,72,100,70,66,71,32,72,13,72,-4,72,-28,72]
+    ]},
+    {selector: '.thread-loop-right', draw: v => `M${v[0]} ${v[1]} C${v[2]} ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]} C${v[8]} ${v[9]} ${v[10]} ${v[11]} ${v[12]} ${v[13]}`, frames: [
+      [130,72,156,27,214,19,223,59,231,96,178,113,130,72],
+      [130,72,160,20,229,13,238,61,241,99,171,111,130,72],
+      [130,72,150,51,177,52,179,69,181,87,151,89,130,72],
+      [130,72,168,70,207,71,240,72,261,72,282,72,303,72]
+    ]},
+    {selector: '.thread-tail-left', draw: v => `M${v[0]} ${v[1]} C${v[2]} ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]}`, frames: [
+      [127,77,97,87,65,110,27,124],
+      [126,76,99,85,60,113,8,139],
+      [129,74,91,80,46,96,-30,109],
+      [130,72,78,73,16,74,-44,75]
+    ]},
+    {selector: '.thread-tail-right', draw: v => `M${v[0]} ${v[1]} C${v[2]} ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]}`, frames: [
+      [133,77,163,87,195,110,233,124],
+      [136,78,174,92,220,120,268,141],
+      [134,75,176,83,236,93,297,102],
+      [130,72,182,73,244,74,312,75]
+    ]}
+  ].map(part => ({...part, element: threadButton.querySelector(part.selector)}));
+  function drawCord(progress) {
+    const marks = [0, .25, .62, 1];
+    const segment = progress < marks[1] ? 0 : progress < marks[2] ? 1 : 2;
+    const amount = (progress - marks[segment]) / (marks[segment + 1] - marks[segment]);
+    const eased = amount * amount * (3 - 2 * amount);
+    cordParts.forEach(part => {
+      const from = part.frames[segment], to = part.frames[segment + 1];
+      part.element.setAttribute('d', part.draw(from.map((value, i) => +(value + (to[i] - value) * eased).toFixed(1))));
+    });
+  }
+  function pullCord() {
+    const start = performance.now();
+    function frame(now) {
+      const progress = Math.min(1, (now - start) / 3000);
+      drawCord(progress);
+      if (progress < 1) untieFrame = requestAnimationFrame(frame);
+    }
+    untieFrame = requestAnimationFrame(frame);
+  }
   ceremony.classList.add('ready-to-unfold');
   ceremonyContent.setAttribute('aria-hidden', 'true');
   threadButton.addEventListener('click', () => {
     if (ceremony.classList.contains('untying') || ceremony.classList.contains('unfolded')) return;
     ceremony.classList.add('untying');
     threadButton.disabled = true;
+    if (!reduced.matches) pullCord();
     untieTimer = setTimeout(() => {
       ceremony.classList.add('unfolded');
       ceremonyContent.removeAttribute('aria-hidden');
@@ -40,7 +86,7 @@
         threadButton.hidden = true;
         $('reminisce-title').focus();
       }, reduced.matches ? 0 : 900);
-    }, reduced.matches ? 0 : 2250);
+    }, reduced.matches ? 0 : 3000);
   });
   const chapters = [...document.querySelectorAll('.memories, .quote-section, .the-letter, .come-home')];
   let chapterObserver;
@@ -67,7 +113,7 @@
     openTimer = setTimeout(finishOpening, reduced.matches ? 0 : 4250);
   }
   function resetLetter() {
-    clearTimeout(openTimer); clearTimeout(gateTimer); clearTimeout(untieTimer); clearTimeout(revealFocusTimer); opening = false; seal.disabled = false;
+    clearTimeout(openTimer); clearTimeout(gateTimer); clearTimeout(untieTimer); clearTimeout(revealFocusTimer); cancelAnimationFrame(untieFrame); drawCord(0); opening = false; seal.disabled = false;
     window.scrollTo({top:0,behavior:'instant'});
     gate.hidden = false; gate.classList.remove('opening','departed');
     document.body.classList.add('sealed'); main.inert = true;
